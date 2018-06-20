@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, FlatList, Image } from 'react-native';
 import { listOrders } from './orders.js';
+import { ImagesView } from './imagesView.js';
 
 export default class App extends React.Component {
     constructor(props) {
@@ -31,15 +32,16 @@ export default class App extends React.Component {
       return(
           <View> 
                 <View style={styles.item_top}> 
-                  <Text> {item.id} </Text>
+                  <Text style={{justifyContent: 'flex-end'}}> {'#'+item.id} </Text>
                   <Text> {item.status} </Text>
                 </View>
                 <View style={styles.item_middle}>
                   <Text> {item.brandList} </Text>
-                  <Image
-                      style={{width: 50, height: 50}}
-                      source={{uri: item.previewImageThumbnails[0]}}
-                    />
+                  <View style={{flexDirection: 'row', }}>
+                    <ImagesView
+                        imageList={item.previewImageThumbnails}
+                      />
+                  </View>
                 </View>
                 <View style={styles.item_bottom}> 
                   <Text> total: ${item.totalAmount} </Text>
@@ -72,7 +74,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         marginTop: 40,
-        backgroundColor: 'lightgray',
+        backgroundColor: '#eee',
         // alignItems: 'center',
         // justifyContent: 'center',
     },
@@ -91,15 +93,24 @@ const styles = StyleSheet.create({
     },
     item_middle: {
       backgroundColor: 'white',
+      borderBottomColor: 'darkgrey',
+      borderBottomWidth: 1,
     },
     item_top: {
-      flex: 0,
-      backgroundColor: 'pink',
+      flex: 1,
+      flexDirection: 'row',
+      backgroundColor: 'white',
+      borderBottomColor: 'darkgrey',
+      borderTopColor: 'darkgrey',
+      borderBottomWidth: 1,
+      borderTopWidth: 1,
       paddingTop: 8,
       paddingBottom: 8,
     },
     item_bottom: {
-      backgroundColor: 'orange',
+      backgroundColor: 'white',
+      borderBottomColor: 'darkgrey',
+      borderBottomWidth: 1,
       marginBottom: 10,
       paddingTop: 8,
       paddingBottom: 8,
